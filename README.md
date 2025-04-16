@@ -77,7 +77,7 @@ We tackle **digit detection** and **digit sequence recognition** on a custom COC
 
 | Model             | Tets mAP | Test Accuracy                                       |
 |------------------|---------------------|---------------------------------------------|
-| Base Anchor      | ~38.7%              | ~82.0%  |
+| Base Anchor      | ~38.0%              | ~82.0%  |
 | Custom Anchor    | ~40.0%              | ~84.0%    |
 
 ![leaderboard snapshot](results/snapshot.png)
