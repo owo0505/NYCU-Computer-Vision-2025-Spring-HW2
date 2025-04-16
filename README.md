@@ -1,4 +1,4 @@
-# NYCU Computer Vision 2025 Spring HW1
+# NYCU Computer Vision 2025 Spring HW2
 
 **StudentID:** 111550135 
 **Name:** 林李奕
@@ -7,15 +7,13 @@
 
 ## Introduction
 
-This is my implementation for NYCU Computer Vision Spring 2025 Homework 1.  
-The goal of this assignment is to classify images into 100 categories using deep learning models.
+This repository contains the solution for HW2 of NYCU Computer Vision 2025 Spring.  
+We tackle **digit detection** and **digit sequence recognition** on a custom COCO‐formatted dataset using:
 
-In this project, I use the `resnest200e` model from [timm](https://github.com/huggingface/pytorch-image-models), combined with:
-
-- **Data Augmentation**: `RandAugment`, `MixUp`, and `CutMix`
-- **Training Tricks**: Cosine Annealing LR scheduler, label smoothing loss alternatives
-- **Evaluation**: Accuracy plots, loss plots, and confusion matrix
-- **Ensemble**: Multiple trained models with different augmentations to boost test performance
+- A **Faster R‑CNN ResNet‑50 FPN v2** backbone (pretrained on COCO).  
+- A **custom anchor generator** for small digits.  
+- **Soft‑NMS** post‑processing to suppress overlapping detections.  
+- A simple left‑to‑right ordering of detected boxes to form digit sequences.
 
 ---
 
@@ -24,8 +22,8 @@ In this project, I use the `resnest200e` model from [timm](https://github.com/hu
 1. Clone this repository:
 
     ```bash
-    git clone https://github.com/owo0505/NYCU-Computer-Vision-2025-Spring.git
-    cd NYCU-Computer-Vision-2025-Spring
+    git clone https://github.com/owo0505/NYCU-Computer-Vision-2025-Spring-HW2.git
+    cd NYCU-Computer-Vision-2025-Spring-HW2
     ```
 
 2. Install dependencies (make sure you have Python ≥ 3.8):
@@ -37,20 +35,24 @@ In this project, I use the `resnest200e` model from [timm](https://github.com/hu
 3. Prepare your dataset in this format:
 
     ```
-    data/
+    nycu-hw2-data/
     ├─ train/
-    │   ├─ class0/
-    │   ├─ class1/
+    │   ├─ 1.png
+    │   ├─ 2.png
     │   ├─ ...
+    │      
+    ├─ train.json
     │   
-    ├─ val/
-    │   ├─ class0/
-    │   ├─ class1/
+    ├─ valid/
+    │   ├─ 1.png
+    │   ├─ 2.png
     │   ├─ ...
     │
+    ├─ valid.json
+    │   
     └─ test/
-        ├─ aaa.jpg
-        ├─ bbb.jpg
+        ├─ 1.png
+        ├─ 2.png
         ├─ ...
 
     ```
@@ -69,27 +71,20 @@ In this project, I use the `resnest200e` model from [timm](https://github.com/hu
     python inference.py
     ```
 
-6. Convert predictions to string labels:
-
-    ```bash
-    python process.py
-    ```
-
 ---
 
 ## Performance snapshot
 
-| Model             | Validation Accuracy | Notes                                       |
+| Model             | Tets mAP | Test Accuracy                                       |
 |------------------|---------------------|---------------------------------------------|
-| resnest200e       | ~93.7%              | Best single model (RandAugment, MixUp/CutMix) |
-| Ensemble (3x200e) | ~94.0%              | Combined output from three trained models   |
+| Base Anchor      | ~38.7%              | ~82.0%  |
+| Custom Anchor    | ~40.0%              | ~84.0%    |
 
 ![leaderboard snapshot](results/snapshot.png)
 
-You can find training curves and confusion matrix output under Result:
+You can find training curves and mAP curve output under Result:
 
-- `loss_curve.png`
-- `accuracy_curve.png`
-- `confusion_matrix.png`
+- `learning_curve.png`
+- `mAP_curve.png`
 
 ---

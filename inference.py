@@ -96,9 +96,9 @@ def soft_nms(boxes, scores, sigma=0.5, score_thresh=0.001):
 
 
 def main():
-    test_images_dir = "/kaggle/input/dl-hw2/nycu-hw2-data/test"
+    test_images_dir = "/path/to/test"
     num_classes = 11
-    model_path = "/kaggle/input/checkpoint/final.pth"
+    model_path = "/path/to/model.pth"
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     dataset_test = DigitTestDataset(test_images_dir,

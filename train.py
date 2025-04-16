@@ -230,10 +230,10 @@ def evaluate_map(model, data_loader, device, score_threshold=0.5):
 
 
 def main():
-    train_images_dir = "/kaggle/input/dl-hw2/nycu-hw2-data/train"
-    train_json = "/kaggle/input/dl-hw2/nycu-hw2-data/train.json"
-    val_images_dir = "/kaggle/input/dl-hw2/nycu-hw2-data/valid"
-    val_json = "/kaggle/input/dl-hw2/nycu-hw2-data/valid.json"
+    train_images_dir = "/path/to/train"
+    train_json = "/path/to/train.json"
+    val_images_dir = "/path/to/valid"
+    val_json = "/path/to/valid.json"
     num_classes = 11
     num_epochs = 6
     batch_size = 4
